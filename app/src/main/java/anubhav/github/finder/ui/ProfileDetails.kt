@@ -41,7 +41,6 @@ class ProfileDetails : AppCompatActivity() {
     // This function initializes the views with the values
     private fun initialViews() {
         binding.btnBack.setOnClickListener { finish() }
-
         binding.tvName.text = login
         //binding.starCount.text = "$starCount Stars"
         binding.webView.loadUrl(htmlUrl)
