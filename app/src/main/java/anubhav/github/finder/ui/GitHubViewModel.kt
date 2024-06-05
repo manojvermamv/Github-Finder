@@ -12,6 +12,7 @@ import anubhav.github.finder.data.GithubData
 import anubhav.github.finder.data.Profile
 import anubhav.github.finder.data.Profile_
 import anubhav.github.finder.data.Repo
+import anubhav.github.finder.data.SearchOrder
 import anubhav.github.finder.global.MyApp
 import anubhav.github.finder.helpers.RetrofitInstance
 import retrofit2.Call
@@ -50,11 +51,13 @@ class GitHubViewModel : ViewModel() {
 
     // Fetch the list of Kotlin repositories
     // from the GitHub API using Retrofit
-    fun getAllProfiles(name: String? = null, location: String? = null, page: Int = 1) {
-        var query = if (location.isNullOrBlank()) name else "location:${Uri.encode(location)}"
-        if (query.isNullOrBlank()) {
-            query = "location:Delhi"
+    fun getAllProfiles(nameOrLocation: String, order: SearchOrder, page: Int = 1) {
+        val query = if (order == SearchOrder.LOCATION) {
+            "location:${Uri.encode(nameOrLocation.ifBlank { "Delhi" })}"
+        } else {
+            nameOrLocation.ifBlank { "location:Delhi" }
         }
+
         println("getAllProfiles: $query")
         RetrofitInstance.githubApi.getProfiles(query, page)
             .enqueue(object : Callback<GithubData<Profile>> {
@@ -107,5 +110,13 @@ class GitHubViewModel : ViewModel() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     var getSavedProfiles = profileBox.query().order(Profile_.login).build().flow()
+
+
+    /*
+    * */
+    val onUpdateSearchQuery = MutableLiveData<Pair<String, SearchOrder>>()
+    fun updateSearchQuery(query: String, order: SearchOrder) {
+        onUpdateSearchQuery.value = Pair(query, order)
+    }
 
 }

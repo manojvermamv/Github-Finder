@@ -20,10 +20,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         setPreferencesFromResource(R.xml.preferences, rootKey);
         MyApp.getSharedPrefs().registerOnSharedPreferenceChangeListener(this);
 
-        EditTextPreference mqttBrokerPortPref = findPreference(MyApp.getAppContext().getString(R.string.pref_key_mqtt_broker_port));
-        if (mqttBrokerPortPref != null)
-            mqttBrokerPortPref.setOnBindEditTextListener(editText -> editText.setInputType(InputType.TYPE_CLASS_NUMBER));
-
         updateDynamicPrefs();
 
         bindClickablePrefs();
@@ -34,11 +30,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         if (key == null)
             return;
 
-        //if (key.contains("mqtt_"))
-        //    MqttClient.disconnect();
+        //if (key.contains("mqtt_")) MqttClient.disconnect();
 
-        if (key.equals(MyApp.getAppContext().getString(R.string.pref_key_mqtt_broker_tls)) ||
-            key.equals(MyApp.getAppContext().getString(R.string.pref_key_mqtt_client_use_auth)))
+        if (key.equals(MyApp.getAppContext().getString(R.string.pref_key_mqtt_broker_tls)))
             updateDynamicPrefs();
     }
 
@@ -49,20 +43,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     }
 
     private void updateDynamicPrefs() {
-        Preference tlsValidatePref = findPreference(MyApp.getAppContext().getString(R.string.pref_key_mqtt_broker_tls_validate));
-        setPrefEnabled(tlsValidatePref, MyApp.getSharedPrefs().getBoolean(MyApp.getAppContext().getString(R.string.pref_key_mqtt_broker_tls), false));
-
-        boolean useAuth = MyApp.getSharedPrefs().getBoolean(MyApp.getAppContext().getString(R.string.pref_key_mqtt_client_use_auth), false);
-        Preference usernamePref = findPreference(MyApp.getAppContext().getString(R.string.pref_key_mqtt_client_auth_username));
-        setPrefEnabled(usernamePref, useAuth);
-        Preference passwordPref = findPreference(MyApp.getAppContext().getString(R.string.pref_key_mqtt_client_auth_password));
-        setPrefEnabled(passwordPref, useAuth);
+        //Preference tlsValidatePref = findPreference(MyApp.getAppContext().getString(R.string.pref_key_mqtt_broker_tls_validate));
+        //setPrefEnabled(tlsValidatePref, MyApp.getSharedPrefs().getBoolean(MyApp.getAppContext().getString(R.string.pref_key_mqtt_broker_tls), false));
     }
 
     private void bindClickablePrefs() {
         buildClickablePref(R.string.pref_key_backup_save, (pref) -> { Helper.backupData(getContext()); return true; });
         buildClickablePref(R.string.pref_key_backup_restore, (pref) -> { Helper.restoreData(getContext()); return true; });
-        buildClickablePref(R.string.pref_key_mqtt_broker_test, (pref) -> { return true; });
 
         Preference githubPref = findPreference(MyApp.getAppContext().getString(R.string.pref_key_info_github));
         if (githubPref != null) {

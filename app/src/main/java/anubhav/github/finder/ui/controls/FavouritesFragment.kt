@@ -45,7 +45,6 @@ class FavouritesFragment() : Fragment() {
                 }
             }
         }
-
         return binding.root
     }
 

@@ -38,42 +38,37 @@
     <string name="dialog_delete_control_title_hasname">Delete %1$s?</string>
     <string name="dialog_delete_control_body">Are you sure you want to delete this control?\n\nYou\'ll have to manually remove it from device controls as well</string>
 
-    <string name="pref_cat_mqtt_broker">MQTT Broker</string>
-    <string name="pref_cat_backup">Backup Controls</string>
+    <string name="pref_cat_general">General</string>
+    <string name="pref_cat_backup">Backup</string>
     <string name="pref_cat_info">Info</string>
 
     <string name="pref_key_mqtt_broker_host">mqtt_broker_host</string>
-    <string name="pref_key_mqtt_broker_port">mqtt_broker_port</string>
     <string name="pref_key_mqtt_client_id">mqtt_client_id</string>
     <string name="pref_key_mqtt_broker_tls">mqtt_broker_tls</string>
-    <string name="pref_key_mqtt_broker_tls_validate">mqtt_broker_tls_validate</string>
-    <string name="pref_key_mqtt_client_use_auth">mqtt_client_use_auth</string>
-    <string name="pref_key_mqtt_client_auth_username">mqtt_client_auth_username</string>
-    <string name="pref_key_mqtt_client_auth_password">mqtt_client_auth_password</string>
-    <string name="pref_key_mqtt_broker_test">mqtt_broker_test</string>
     <string name="pref_key_backup_save">backup_save</string>
     <string name="pref_key_backup_restore">backup_restore</string>
     <string name="pref_key_info_github">info_github</string>
 
     <string name="pref_title_mqtt_broker_host">Host</string>
-    <string name="pref_title_mqtt_broker_port">Port</string>
     <string name="pref_title_mqtt_client_id">Client ID</string>
     <string name="pref_title_mqtt_broker_tls">Use SSL/TLS</string>
-    <string name="pref_title_mqtt_broker_tls_validate">Validate Certificate</string>
-    <string name="pref_title_mqtt_client_use_auth">Use Credentials</string>
-    <string name="pref_title_mqtt_client_auth_username">Username</string>
-    <string name="pref_title_mqtt_client_auth_password">Password</string>
-    <string name="pref_title_mqtt_broker_test">Test Connection</string>
-    <string name="pref_title_backup_save">Backup on broker</string>
-    <string name="pref_title_backup_restore">Restore from broker</string>
+    <string name="pref_title_backup_save">Backup in file</string>
+    <string name="pref_title_backup_restore">Restore from file</string>
     <string name="pref_title_info_github">Github Finder on GitHub</string>
 
     <string name="pref_sum_mqtt_client_id">Used by the broker to identify this client. If not set, will default to \"mqttdroid\"</string>
-    <string name="pref_sum_mqtt_broker_tls_validate">If enabled the certificate the broker sends must be signed by a trusted CA</string>
-    <string name="pref_sum_broker_test">Check if Github Finder can connect to the broker with the settings provided above</string>
-    <string name="pref_sum_backup_save">Backup controls as a retained message on the MQTT broker</string>
-    <string name="pref_sum_backup_restore">Restore controls from a previous backup</string>
+    <string name="pref_sum_backup_save">Backup favorite profiles on the Local file</string>
+    <string name="pref_sum_backup_restore">Restore favorite profiles from a previous backup</string>
     <string name="pref_sum_info_github">Commit: %1$s</string>
 
     <string name="icd_title">Select Custom Icon</string>
+    <string name="search">Search</string>
+    <string name="sorting_order">Sorting order</string>
+    <string name="searching_order">Searching order</string>
+    <string name="location">Location</string>
+    <string name="name">Name</string>
+    <string name="favourites">Favourites</string>
+    <string name="settings">Settings</string>
+
+
 </resources>

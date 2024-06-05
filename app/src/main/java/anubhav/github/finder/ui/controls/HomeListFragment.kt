@@ -2,14 +2,11 @@ package anubhav.github.finder.ui.controls
 
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.PopupMenu
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,13 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import anubhav.github.finder.R
 import anubhav.github.finder.adapters.ProfileAdapter
+import anubhav.github.finder.data.SearchOrder
 import anubhav.github.finder.databinding.FragHomeBinding
+import anubhav.github.finder.global.MyApp
 import anubhav.github.finder.ui.GitHubViewModel
 import anubhav.github.finder.ui.ProfileDetails
-import anubhav.github.finder.utils.hideKeyboard
 import anubhav.github.finder.utils.isFirstItemVisible
 import anubhav.github.finder.utils.systemBarsMargin
-import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 class HomeListFragment() : Fragment() {
@@ -65,17 +62,12 @@ class HomeListFragment() : Fragment() {
             adapter = recyclerViewAdapter
         }
 
-        binding.edSearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
-            when (actionId) {
-                //EditorInfo.IME_ACTION_DONE, EditorInfo.IME_ACTION_NEXT, EditorInfo.IME_ACTION_PREVIOUS -> {
-                EditorInfo.IME_ACTION_DONE -> {
-                    hideKeyboard(binding.root)
-                    fetchData()
-                    return@OnEditorActionListener true
-                }
+        viewModel.onUpdateSearchQuery.observe(viewLifecycleOwner) { pair ->
+            pair?.let {
+                val (query, order) = pair
+                fetchData(query, order)
             }
-            false
-        })
+        }
 
         val fab = binding.scrollUp
         with(fab) {
@@ -107,19 +99,11 @@ class HomeListFragment() : Fragment() {
             recyclerView.layoutManager?.onRestoreInstanceState(it)
         }
 
-        showSortMenu(binding.ivSortBy) {
-            binding.edSearch.hint = it
-            binding.edSearch.setText("")
-            mSort = it.lowercase()
-            fetchData()
-        }
-        fetchData()
-
+        fetchData("", MyApp.preference.searchOrderType())
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 launch {
                     viewModel.observeProfilesData().observe(viewLifecycleOwner) { data ->
-                        Log.e("profileAdapter --->", "\n${Gson().toJson(data?.get(0))}")
                         recyclerViewAdapter.setData(data)
                     }
                 }
@@ -138,12 +122,8 @@ class HomeListFragment() : Fragment() {
         _binding = null
     }
 
-    private fun fetchData() {
-        if (mSort == "location") {
-            viewModel.getAllProfiles(null, binding.edSearch.text.toString().trim())
-        } else {
-            viewModel.getAllProfiles(binding.edSearch.text.toString().trim(), null)
-        }
+    private fun fetchData(query: String, order: SearchOrder) {
+        viewModel.getAllProfiles(query.trim(), order)
     }
 
     private fun showSortMenu(view: View, callback: (String) -> Unit) {

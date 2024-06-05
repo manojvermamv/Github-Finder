@@ -48,7 +48,7 @@ class ProfileAdapter(
 
         val profile = data[position]
         holder.binding.apply {
-            Glide.with(avatar).load(profile.avatarUrl).into(avatar)
+            Glide.with(context).load(profile.avatarUrl).into(avatar)
             repoName.text = profile.login
             description.text = profile.htmlUrl
             description.setOnClickListener {
@@ -81,9 +81,7 @@ class ProfileAdapter(
         }
     }
 
-    // Returns the number of items
-    // in the data ArrayList
-    override fun getItemCount(): Int {
-        return data.size
-    }
+    // Returns the number of items in the data ArrayList
+    override fun getItemCount() = data.size
+
 }

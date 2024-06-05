@@ -2,6 +2,7 @@ package anubhav.github.finder.global
 
 import android.content.Context
 import android.content.SharedPreferences
+import anubhav.github.finder.data.SearchOrder
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
@@ -89,6 +90,10 @@ class SharedPreferenceManager constructor(private val context: Context) {
     fun firebaseIdToken(value: String) = write(PrefParam.FIREBASE_ID_TOKEN, value)
     fun firebaseIdToken(): String = read(PrefParam.FIREBASE_ID_TOKEN, "")
 
+    fun searchOrder(value: String) = write(PrefParam.SEARCH_ORDER, value)
+    fun searchOrder(): String = read(PrefParam.SEARCH_ORDER, SearchOrder.LOCATION.name)
+    fun searchOrderType(): SearchOrder = SearchOrder.valueOf(searchOrder())
+
     // app settings
     //fun defaultConfig(value: DefaultConfig) = write(PrefParam.DEFAULT_CONFIG, value, DefaultConfig::class.java)
     //fun defaultConfig(): DefaultConfig = read(PrefParam.DEFAULT_CONFIG, DefaultConfig())
@@ -110,6 +115,7 @@ enum class PrefParam {
     KEY_ON_OFF_NOTIFICATION,
     FIREBASE_UID,
     FIREBASE_ID_TOKEN,
+    SEARCH_ORDER,
 
     // app settings keys
     DEFAULT_CONFIG;

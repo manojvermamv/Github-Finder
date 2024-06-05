@@ -91,6 +91,7 @@ dependencies {
 
     // rxjava
     implementation("io.reactivex.rxjava3:rxjava:3.1.8")
+    implementation("com.jakewharton.rxbinding4:rxbinding:4.0.0")
 
     // extra
     implementation("com.google.code.gson:gson:2.10.1")
