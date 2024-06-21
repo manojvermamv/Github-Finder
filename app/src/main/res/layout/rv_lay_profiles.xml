@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -47,7 +48,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/layFollowers"
+        android:id="@+id/layGithub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -57,29 +58,23 @@
         android:paddingEnd="5dp">
 
         <ImageView
+            android:id="@+id/ivGithub"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:padding="1dp"
-            android:src="@drawable/ic_group_24" />
+            android:src="@drawable/ic_github"
+            app:tint="@android:color/black" />
 
         <TextView
-            android:id="@+id/noOfStars"
+            android:id="@+id/txtGithub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
+            android:text="Click here to visit"
             android:textColor="@android:color/black"
-            android:textSize="13sp"
-            tools:text="27688" />
+            android:textSize="13sp" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="15sp"
-        tools:text="Algorithms and data structures in Swift" />
 
     <View
         android:layout_width="match_parent"

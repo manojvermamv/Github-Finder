@@ -60,6 +60,7 @@
     <string name="pref_sum_backup_save">Backup favorite profiles on the Local file</string>
     <string name="pref_sum_backup_restore">Restore favorite profiles from a previous backup</string>
     <string name="pref_sum_info_github">Commit: %1$s</string>
+    <string name="follower_following">%1$s follower · %2$s following</string>
 
     <string name="icd_title">Select Custom Icon</string>
     <string name="search">Search</string>

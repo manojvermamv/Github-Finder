@@ -25,7 +25,7 @@ class GitHubViewModel : ViewModel() {
     // hold the list of GitHub repositories or profiles
     private var githubReposData = MutableLiveData<List<Repo>>()
     private var githubProfilesData = MutableLiveData<List<Profile>?>()
-    private var githubUserData = MutableLiveData<ArrayList<FullProfile>?>()
+    private var githubUserData = MutableLiveData<FullProfile?>()
 
     // Fetch the list of Kotlin repositories
     // from the GitHub API using Retrofit
@@ -77,17 +77,17 @@ class GitHubViewModel : ViewModel() {
 
     fun getUserProfile(username: String) {
         RetrofitInstance.githubApi.getUser(username)
-            .enqueue(object : Callback<ArrayList<FullProfile>> {
-                override fun onResponse(call: Call<ArrayList<FullProfile>>, response: Response<ArrayList<FullProfile>>) {
+            .enqueue(object : Callback<FullProfile> {
+                override fun onResponse(call: Call<FullProfile>, response: Response<FullProfile>) {
                     // If the API call is successful and the response body is not null,
                     // set the value of githubLiveData to the list of repositories returned by the API
                     githubUserData.value = response.body()
                 }
 
                 // If the API call fails, log the error message using Logcat
-                override fun onFailure(call: Call<ArrayList<FullProfile>>, t: Throwable) {
+                override fun onFailure(call: Call<FullProfile>, t: Throwable) {
                     githubUserData.value = null
-                    Log.d("TAG", t.message.toString())
+                    Log.d("getUserProfile", t.message.toString())
                 }
             })
     }
@@ -99,6 +99,9 @@ class GitHubViewModel : ViewModel() {
     }
     fun observeProfilesData(): LiveData<List<Profile>?> {
         return githubProfilesData
+    }
+    fun observeUserData(): LiveData<FullProfile?> {
+        return githubUserData
     }
 
 

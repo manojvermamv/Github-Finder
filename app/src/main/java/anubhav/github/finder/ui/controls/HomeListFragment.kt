@@ -75,7 +75,7 @@ class HomeListFragment() : Fragment() {
             setIconResource(R.drawable.arrow_up)
             setOnClickListener { recyclerView.smoothScrollToPosition(0) }
             alpha = 0f
-            isVisible = true
+            visibility = View.VISIBLE
             systemBarsMargin(16)
         }
 

@@ -15,26 +15,25 @@ import androidx.annotation.AttrRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import androidx.core.content.getSystemService
 import anubhav.github.finder.R
 
 inline val Context.clipboardManager: ClipboardManager?
-    get() = getSystemService()
+    get() = ContextCompat.getSystemService(this, ClipboardManager::class.java)
 
 inline val Context.connectivityManager: ConnectivityManager?
-    get() = getSystemService()
+    get() = ContextCompat.getSystemService(this, ConnectivityManager::class.java)
 
 inline val Context.inputManager: InputMethodManager?
-    get() = getSystemService()
+    get() = ContextCompat.getSystemService(this, InputMethodManager::class.java)
 
 inline val Context.jobScheduler: JobScheduler?
-    get() = getSystemService()
+    get() = ContextCompat.getSystemService(this, JobScheduler::class.java)
 
 inline val Context.notificationManager: NotificationManager?
-    get() = getSystemService()
+    get() = ContextCompat.getSystemService(this, NotificationManager::class.java)
 
 inline val Context.powerManager: PowerManager?
-    get() = getSystemService()
+    get() = ContextCompat.getSystemService(this, PowerManager::class.java)
 
 fun Context.showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 

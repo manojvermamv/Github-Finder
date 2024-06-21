@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -31,8 +32,9 @@ interface GithubApi {
         @Query("page") pageNumber: Int
     ): Call<GithubData<Profile>>
 
-    @GET("users/")
+    @GET("users/{username}")
     fun getUser(
-        @Query("q") search: String
-    ): Call<ArrayList<FullProfile>>
+        @Path("username") username: String
+    ): Call<FullProfile>
+
 }

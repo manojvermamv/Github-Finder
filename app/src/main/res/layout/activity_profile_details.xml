@@ -45,12 +45,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ownerAvatarImage"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
                 android:layout_alignParentStart="true"
-                android:src="@drawable/ic_account_circle_24" />
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/tvDesc"
@@ -76,7 +77,7 @@
                 tools:text="More" />
 
             <LinearLayout
-                android:id="@+id/linear_layout_1"
+                android:id="@+id/layOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvMore"
@@ -88,25 +89,27 @@
                 <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/ic_baseline_star_border_24" />
+                    android:padding="@dimen/_1sdp"
+                    android:src="@drawable/ic_location" />
 
                 <TextView
-                    android:id="@+id/star_count"
+                    android:id="@+id/tvOne"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_20sdp"
                     android:gravity="center"
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_1sdp"
-                    android:text="27866 Stars"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_13ssp" />
+                    android:textSize="@dimen/_13ssp"
+                    tools:text="Delhi, India" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/layTwo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/linear_layout_1"
+                android:layout_below="@+id/layOne"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@+id/ownerAvatarImage"
@@ -115,20 +118,22 @@
                 <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/ic_baseline_scatter_plot_24" />
+                    android:src="@drawable/ic_following"
+                    app:tint="@color/black" />
 
                 <TextView
-                    android:id="@+id/fork_count"
+                    android:id="@+id/tvTwo"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_20sdp"
                     android:gravity="center"
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_1sdp"
-                    android:text="2380 Forks"
+                    android:text="@string/follower_following"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_13ssp" />
 
             </LinearLayout>
+
 
         </RelativeLayout>
 

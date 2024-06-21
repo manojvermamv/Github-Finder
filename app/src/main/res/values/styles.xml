@@ -7,9 +7,15 @@
         <item name="android:paddingLeft">8dp</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
     </style>
+
     <style name="controlitem_subtitle" parent="controlitem_title">
         <item name="android:layout_marginRight">8dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Small</item>
+    </style>
+
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
     </style>
 </resources>

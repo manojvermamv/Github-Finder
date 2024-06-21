@@ -10,6 +10,8 @@ import anubhav.github.finder.helpers.Utils
 import anubhav.github.finder.data.Profile
 import anubhav.github.finder.databinding.RvLayProfilesBinding
 import anubhav.github.finder.global.MyApp
+import anubhav.github.finder.utils.copyToClipboard
+import anubhav.github.finder.utils.showToast
 import java.lang.RuntimeException
 
 class ProfileAdapter(
@@ -50,10 +52,10 @@ class ProfileAdapter(
         holder.binding.apply {
             Glide.with(context).load(profile.avatarUrl).into(avatar)
             repoName.text = profile.login
-            description.text = profile.htmlUrl
-            description.setOnClickListener {
-                Utils.openLink(context, data[position].htmlUrl?:"")
-            }
+            txtGithub.setOnClickListener { performGithubAction(profile, false) }
+            txtGithub.setOnLongClickListener { performGithubAction(profile, true) }
+            ivGithub.setOnClickListener { performGithubAction(profile, false) }
+            ivGithub.setOnLongClickListener { performGithubAction(profile, true) }
 
             ivFav.setImageResource(if (profile.isSaved()) R.drawable.ic_favorite_filled else R.drawable.ic_favorite_outline)
             ivFav.setOnClickListener {
@@ -79,6 +81,16 @@ class ProfileAdapter(
         } catch (e: RuntimeException) {
             false
         }
+    }
+
+    private fun performGithubAction(profile: Profile, copyToClipboard: Boolean): Boolean {
+        if (copyToClipboard) {
+            context.copyToClipboard(profile.htmlUrl?:"")
+            context.showToast("Copied to clipboard.")
+        } else {
+            Utils.openLink(context, profile.htmlUrl?:"")
+        }
+        return true
     }
 
     // Returns the number of items in the data ArrayList
