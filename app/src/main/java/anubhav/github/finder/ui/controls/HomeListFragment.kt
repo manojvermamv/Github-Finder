@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -21,7 +20,7 @@ import anubhav.github.finder.data.SearchOrder
 import anubhav.github.finder.databinding.FragHomeBinding
 import anubhav.github.finder.global.MyApp
 import anubhav.github.finder.ui.GitHubViewModel
-import anubhav.github.finder.ui.ProfileDetails
+import anubhav.github.finder.ui.ProfileDetailsActivity
 import anubhav.github.finder.utils.isFirstItemVisible
 import anubhav.github.finder.utils.systemBarsMargin
 import kotlinx.coroutines.launch
@@ -42,7 +41,6 @@ class HomeListFragment() : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerViewAdapter: ProfileAdapter
 
-    private var mSort = "location"
     private val shortAnimationDuration by lazy { resources.getInteger(android.R.integer.config_shortAnimTime) }
 
     override fun onCreateView(
@@ -56,8 +54,8 @@ class HomeListFragment() : Fragment() {
             layoutManager = LinearLayoutManager(context)
             isMotionEventSplittingEnabled = false
             setHasFixedSize(true)
-            recyclerViewAdapter = ProfileAdapter(requireContext()) { profile ->
-                ProfileDetails.start(requireContext(), profile)
+            recyclerViewAdapter = ProfileAdapter(requireContext()) { profile, isImageClick ->
+                ProfileDetailsActivity.start(requireContext(), profile)
             }
             adapter = recyclerViewAdapter
         }

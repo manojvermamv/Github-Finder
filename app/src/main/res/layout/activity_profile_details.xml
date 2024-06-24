@@ -87,8 +87,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_19sdp"
+                    android:layout_height="@dimen/_19sdp"
                     android:padding="@dimen/_1sdp"
                     android:src="@drawable/ic_location" />
 
@@ -116,8 +116,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_19sdp"
+                    android:layout_height="@dimen/_19sdp"
+                    android:padding="@dimen/_1sdp"
                     android:src="@drawable/ic_following"
                     app:tint="@color/black" />
 
@@ -128,12 +129,11 @@
                     android:gravity="center"
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_1sdp"
-                    android:text="@string/follower_following"
+                    android:text="@string/followers_following"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_13ssp" />
 
             </LinearLayout>
-
 
         </RelativeLayout>
 
@@ -159,6 +159,35 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_read_me" />
+
+        <RelativeLayout
+            android:id="@+id/zoomageViewLay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#76000000"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.jsibbold.zoomage.ZoomageView
+                android:id="@+id/zoomageView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_320sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:zoomage_animateOnReset="true"
+                app:zoomage_autoCenter="true"
+                app:zoomage_autoResetMode="UNDER"
+                app:zoomage_maxScale="8"
+                app:zoomage_minScale="0.6"
+                app:zoomage_restrictBounds="false"
+                app:zoomage_translatable="true"
+                app:zoomage_zoomable="true"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

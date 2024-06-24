@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ProfileDetails"
+            android:name=".ui.ProfileDetailsActivity"
             android:configChanges="keyboardHidden"
             android:exported="false"
             android:screenOrientation="portrait"

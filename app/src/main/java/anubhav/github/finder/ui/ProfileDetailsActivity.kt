@@ -4,29 +4,38 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import anubhav.github.finder.R
 import anubhav.github.finder.data.FullProfile
 import com.bumptech.glide.Glide
 import anubhav.github.finder.data.Profile
 import anubhav.github.finder.databinding.ActivityProfileDetailsBinding
+import anubhav.github.finder.helpers.Utils
+import anubhav.github.finder.utils.UtilX
+import anubhav.github.finder.utils.copyToClipboard
+import anubhav.github.finder.utils.device.Huawei
+import anubhav.github.finder.utils.getMutatedIcon
+import anubhav.github.finder.utils.sdkAbove
+import anubhav.github.finder.utils.showToast
 import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.coroutines.launch
 
-// This is the class that displays
-// the details of a repository
-class ProfileDetails : AppCompatActivity() {
+import anubhav.github.finder.R as CommonR
+import anubhav.github.finder.R.string as stringRes
+
+// This is the class that displays the details of a repository
+class ProfileDetailsActivity : AppCompatActivity() {
 
     companion object {
         fun start(context: Context, item: Profile) {
-            context.startActivity(Intent(context, ProfileDetails::class.java).apply {
+            context.startActivity(Intent(context, ProfileDetailsActivity::class.java).apply {
                 putExtra("login", item.login)
-                putExtra("url", item.url)
                 putExtra("htmlUrl", item.htmlUrl)
                 putExtra("avatarUrl", item.avatarUrl)
             })
@@ -41,10 +50,8 @@ class ProfileDetails : AppCompatActivity() {
 
 
     private val login by lazy { intent.getStringExtra("login") ?: "" }
-    private val url by lazy { intent.getStringExtra("url") ?: "" }
     private val htmlUrl by lazy { intent.getStringExtra("htmlUrl") ?: "" }
     private val avatarUrl by lazy { intent.getStringExtra("avatarUrl") ?: "" }
-
 
     private val viewModel by viewModels<GitHubViewModel>()
 
@@ -75,7 +82,6 @@ class ProfileDetails : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-
         supportActionBar?.title = login
         // Enable the back button (up navigation)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -84,24 +90,38 @@ class ProfileDetails : AppCompatActivity() {
     // This function initializes the views with the values
     private fun setupViews(mHtmlUrl: String? = null, mAvatarUrl: String? = null, profile: FullProfile? = null) {
         binding.tvDesc.text = profile?.name
+        binding.tvDesc.isGone = profile?.name.isNullOrBlank()
+
         binding.tvMore.text = profile?.bio
+        binding.tvMore.isGone = profile?.bio.isNullOrBlank()
 
         binding.tvOne.text = profile?.location
-        binding.layOne.isVisible = (profile?.location != null)
+        binding.layOne.isGone = profile?.location.isNullOrBlank()
 
-        val followers = (profile?.followers?:0).toString()
-        val following = (profile?.following?:0).toString()
-        binding.tvTwo.text = resources.getString(R.string.follower_following, followers, following)
+        val followers = UtilX.formatUsersCount((profile?.followers?:0).toLong())
+        val following = UtilX.formatUsersCount((profile?.following?:0).toLong())
+        binding.tvTwo.text = resources.getString(stringRes.followers_following, followers, following)
 
         binding.webView.loadUrl(mHtmlUrl?:htmlUrl)
-        Glide.with(applicationContext).load(mAvatarUrl?:avatarUrl).into(binding.ownerAvatarImage)
+        binding.ownerAvatarImage.apply {
+            loadImage(mAvatarUrl?:avatarUrl)
+            setOnClickListener {
+                binding.zoomageViewLay.isVisible = true
+                binding.zoomageView.loadImage(mAvatarUrl?:avatarUrl)
+            }
+        }
+        binding.zoomageViewLay.setOnClickListener { it.isVisible = false }
+    }
+
+    private fun ImageView.loadImage(image: String) {
+        Glide.with(applicationContext).load(image).into(this)
     }
 
     private fun fetchUserData() {
         viewModel.getUserProfile(login)
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.observeUserData().observe(this@ProfileDetails) { data ->
+                viewModel.observeUserData().observe(this@ProfileDetailsActivity) { data ->
                     setupViews(data?.htmlUrl, data?.avatarUrl, data)
                 }
             }

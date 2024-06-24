@@ -99,6 +99,7 @@ dependencies {
     implementation("com.intuit.ssp:ssp-android:1.1.1")
     implementation("com.hivemq:hivemq-mqtt-client:1.3.3")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.jsibbold:zoomage:1.3.1")
     implementation("com.maltaisn:icondialog:3.3.0")
     implementation("com.maltaisn:iconpack-default:1.1.0")
     implementation("com.github.skydoves:colorpickerview:2.3.0")

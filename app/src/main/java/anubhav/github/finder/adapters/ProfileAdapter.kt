@@ -14,9 +14,9 @@ import anubhav.github.finder.utils.copyToClipboard
 import anubhav.github.finder.utils.showToast
 import java.lang.RuntimeException
 
-class ProfileAdapter(
+class ProfileAdapter constructor(
     private val context: Context,
-    private val onItemClicked: (Profile) -> Unit
+    private val onItemClicked: (profile: Profile, isImageClick: Boolean) -> Unit
 ) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
 
     // ArrayList of data items to be
@@ -51,6 +51,8 @@ class ProfileAdapter(
         val profile = data[position]
         holder.binding.apply {
             Glide.with(context).load(profile.avatarUrl).into(avatar)
+            avatar.setOnClickListener { onItemClicked(data[position], true) }
+
             repoName.text = profile.login
             txtGithub.setOnClickListener { performGithubAction(profile, false) }
             txtGithub.setOnLongClickListener { performGithubAction(profile, true) }
@@ -68,10 +70,9 @@ class ProfileAdapter(
                 notifyItemChanged(position)
             }
         }
-
         holder.itemView.setOnClickListener {
             //data[position].url
-            onItemClicked(data[position])
+            onItemClicked(data[position], false)
         }
     }
 
@@ -86,7 +87,7 @@ class ProfileAdapter(
     private fun performGithubAction(profile: Profile, copyToClipboard: Boolean): Boolean {
         if (copyToClipboard) {
             context.copyToClipboard(profile.htmlUrl?:"")
-            context.showToast("Copied to clipboard.")
+            context.showToast(context.getString(R.string.copied_to_clipboard))
         } else {
             Utils.openLink(context, profile.htmlUrl?:"")
         }

@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import anubhav.github.finder.adapters.ProfileAdapter
 import anubhav.github.finder.databinding.FragFavouritesBinding
 import anubhav.github.finder.ui.GitHubViewModel
-import anubhav.github.finder.ui.ProfileDetails
+import anubhav.github.finder.ui.ProfileDetailsActivity
 
 class FavouritesFragment() : Fragment() {
 
@@ -23,8 +23,8 @@ class FavouritesFragment() : Fragment() {
 
     private val viewModel by activityViewModels<GitHubViewModel>()
     private val profileAdapter by lazy {
-        ProfileAdapter(requireContext()) { profile ->
-            ProfileDetails.start(requireContext(), profile)
+        ProfileAdapter(requireContext()) { profile, isImageClick ->
+            ProfileDetailsActivity.start(requireContext(), profile)
         }
     }
 
