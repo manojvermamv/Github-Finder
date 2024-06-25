@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<background android:drawable="@color/ic_launcher_background" />-->
+    <background>
+        <inset
+            android:insetLeft="18dp"
+            android:insetTop="18dp"
+            android:insetRight="18dp"
+            android:insetBottom="18dp">
+            <shape android:shape="rectangle">
+                <solid android:color="#FFFFFF" />
+            </shape>
+        </inset>
+    </background>
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+    <!-- Starting with Android 13 (API level 33), you can opt-in to providing a monochrome drawable.-->
+    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+</adaptive-icon>

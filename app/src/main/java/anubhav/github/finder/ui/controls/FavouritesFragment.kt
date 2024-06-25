@@ -15,6 +15,7 @@ import anubhav.github.finder.adapters.ProfileAdapter
 import anubhav.github.finder.databinding.FragFavouritesBinding
 import anubhav.github.finder.ui.GitHubViewModel
 import anubhav.github.finder.ui.ProfileDetailsActivity
+import anubhav.github.finder.utils.initZoomView
 
 class FavouritesFragment() : Fragment() {
 
@@ -24,7 +25,11 @@ class FavouritesFragment() : Fragment() {
     private val viewModel by activityViewModels<GitHubViewModel>()
     private val profileAdapter by lazy {
         ProfileAdapter(requireContext()) { profile, isImageClick ->
-            ProfileDetailsActivity.start(requireContext(), profile)
+            if (isImageClick) {
+                binding.zoomView.initZoomView(profile.avatarUrl?:"")
+            } else {
+                ProfileDetailsActivity.start(requireContext(), profile)
+            }
         }
     }
 

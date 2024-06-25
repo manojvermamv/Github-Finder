@@ -4,16 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import anubhav.github.finder.data.FullProfile
-import com.bumptech.glide.Glide
 import anubhav.github.finder.data.Profile
 import anubhav.github.finder.databinding.ActivityProfileDetailsBinding
 import anubhav.github.finder.helpers.Utils
@@ -23,6 +20,8 @@ import anubhav.github.finder.utils.device.Huawei
 import anubhav.github.finder.utils.getMutatedIcon
 import anubhav.github.finder.utils.sdkAbove
 import anubhav.github.finder.utils.showToast
+import anubhav.github.finder.utils.initZoomView
+import anubhav.github.finder.utils.loadImage
 import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.coroutines.launch
 
@@ -103,18 +102,8 @@ class ProfileDetailsActivity : AppCompatActivity() {
         binding.tvTwo.text = resources.getString(stringRes.followers_following, followers, following)
 
         binding.webView.loadUrl(mHtmlUrl?:htmlUrl)
-        binding.ownerAvatarImage.apply {
-            loadImage(mAvatarUrl?:avatarUrl)
-            setOnClickListener {
-                binding.zoomageViewLay.isVisible = true
-                binding.zoomageView.loadImage(mAvatarUrl?:avatarUrl)
-            }
-        }
-        binding.zoomageViewLay.setOnClickListener { it.isVisible = false }
-    }
-
-    private fun ImageView.loadImage(image: String) {
-        Glide.with(applicationContext).load(image).into(this)
+        binding.ownerAvatarImage.loadImage(mAvatarUrl?:avatarUrl)
+        binding.zoomView.initZoomView(binding.ownerAvatarImage, mAvatarUrl?:avatarUrl)
     }
 
     private fun fetchUserData() {

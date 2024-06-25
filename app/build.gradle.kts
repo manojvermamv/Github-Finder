@@ -105,9 +105,4 @@ dependencies {
     implementation("com.github.skydoves:colorpickerview:2.3.0")
     //implementation("ru.superjob:kotlin-permissions:1.0.3")
 
-    // testing
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
 }

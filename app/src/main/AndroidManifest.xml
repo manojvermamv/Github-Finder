@@ -9,7 +9,7 @@
         android:name=".global.MyApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.MqttDroid">
+        android:theme="@style/Theme.GithubGo">
 
         <activity
             android:name=".MainActivity"

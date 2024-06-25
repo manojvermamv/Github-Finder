@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MqttDroid" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.GithubGo" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/accent1_lighter</item>
         <item name="colorPrimaryVariant">@color/accent1_lighter</item>
@@ -13,11 +13,11 @@
         <item name="android:statusBarColor">?colorSurfaceContainer</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
-        <item name="alertDialogTheme">@style/Theme.MqttDroid.AlertDialog</item>
-        <item name="preferenceTheme">@style/Theme.MqttDroid.Preference.Light</item>
+        <item name="alertDialogTheme">@style/Theme.GithubGo.AlertDialog</item>
+        <item name="preferenceTheme">@style/Theme.GithubGo.Preference.Light</item>
     </style>
 
-    <style name="Theme.MqttDroid.Preference.Light" parent="PreferenceThemeOverlay">
+    <style name="Theme.GithubGo.Preference.Light" parent="PreferenceThemeOverlay">
         <item name="switchPreferenceCompatStyle">@style/PreferenceMaterialSwitch</item>
         <item name="android:tint">@android:color/black</item>
     </style>
@@ -26,7 +26,7 @@
         <item name="widgetLayout">@layout/preference_switch</item>
     </style>
 
-    <style name="Theme.MqttDroid.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+    <style name="Theme.GithubGo.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="dialogCornerRadius">28dp</item>
         <item name="cornerFamily">rounded</item>
         <item name="android:colorBackground">?attr/colorSurface</item>

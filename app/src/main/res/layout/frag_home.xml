@@ -93,4 +93,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ContentDescription" />
 
+    <include
+        android:id="@+id/zoomView"
+        layout="@layout/lay_full_image" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

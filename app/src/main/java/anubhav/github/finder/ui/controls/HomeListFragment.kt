@@ -21,6 +21,7 @@ import anubhav.github.finder.databinding.FragHomeBinding
 import anubhav.github.finder.global.MyApp
 import anubhav.github.finder.ui.GitHubViewModel
 import anubhav.github.finder.ui.ProfileDetailsActivity
+import anubhav.github.finder.utils.initZoomView
 import anubhav.github.finder.utils.isFirstItemVisible
 import anubhav.github.finder.utils.systemBarsMargin
 import kotlinx.coroutines.launch
@@ -55,7 +56,11 @@ class HomeListFragment() : Fragment() {
             isMotionEventSplittingEnabled = false
             setHasFixedSize(true)
             recyclerViewAdapter = ProfileAdapter(requireContext()) { profile, isImageClick ->
-                ProfileDetailsActivity.start(requireContext(), profile)
+                if (isImageClick) {
+                    binding.zoomView.initZoomView(profile.avatarUrl?:"")
+                } else {
+                    ProfileDetailsActivity.start(requireContext(), profile)
+                }
             }
             adapter = recyclerViewAdapter
         }

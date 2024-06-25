@@ -4,13 +4,45 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import anubhav.github.finder.databinding.LayFullImageBinding
+import anubhav.github.finder.ui.common.ZoomImageView
+import com.bumptech.glide.Glide
 import kotlin.math.min
 import kotlin.math.roundToInt
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
+
+
+fun LayFullImageBinding.initZoomView(anchor: View, image: String) {
+    root.setOnClickListener { root.isVisible = false }
+    anchor.setOnClickListener {
+        val zoomImageView: ZoomImageView = view
+        zoomImageView.onDrawableLoaded = { progress.isVisible = false }
+        Glide.with(root.context).load(image).into(zoomImageView)
+        zoomImageView.swipeToDismissEnabled = true
+        zoomImageView.onDismiss = { root.isVisible = false }
+        root.isVisible = true
+    }
+}
+
+fun LayFullImageBinding.initZoomView(image: String) {
+    root.setOnClickListener { root.isVisible = false }
+    val zoomImageView: ZoomImageView = view
+    zoomImageView.onDrawableLoaded = { progress.isVisible = false }
+    Glide.with(root.context).load(image).into(zoomImageView)
+    zoomImageView.swipeToDismissEnabled = true
+    zoomImageView.onDismiss = { root.isVisible = false }
+    root.isVisible = true
+}
+
+fun ImageView.loadImage(image: String) {
+    Glide.with(this).load(image).into(this)
+}
 
 fun TextView.setTextSizeScaled(size: Int) {
     val realSize = (size * resources.displayMetrics.scaledDensity).roundToInt()

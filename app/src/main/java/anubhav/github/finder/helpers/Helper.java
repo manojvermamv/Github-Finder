@@ -47,21 +47,6 @@ public class Helper {
                 .show());
     }
 
-    /*public static void deleteControlDialog(final Context ctx, MqttControl control, Runnable callback) {
-        showPositiveNegativeActionsDialog(ctx,
-                !control.hasEmptyName() ? ctx.getString(R.string.dialog_delete_control_title_hasname, control.getName()) : ctx.getString(R.string.dialog_delete_control_title_noname),
-                ctx.getString(R.string.dialog_delete_control_body),
-                "Delete",
-                (dialog, which) -> {
-                    MqttClient.unbindControl(control);
-                    MyApp.appInstance.repository.delete(control);
-                    if (callback != null)
-                        callback.run();
-                },
-                ctx.getString(android.R.string.cancel),
-                null);
-    }*/
-
     private static final String BACKUP_MQTT_TOPIC = "github_finder/backup";
     public static void backupData(final Context ctx) {
         showPositiveNegativeActionsDialog(ctx,

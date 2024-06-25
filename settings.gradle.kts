@@ -1,2 +1,2 @@
-rootProject.name = "Github Finder"
+rootProject.name = "GithubGo"
 include(":app")

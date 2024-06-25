@@ -2,17 +2,20 @@ package anubhav.github.finder.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import anubhav.github.finder.R
 import anubhav.github.finder.helpers.Utils
 import anubhav.github.finder.data.Profile
+import anubhav.github.finder.databinding.LayFullImageBinding
 import anubhav.github.finder.databinding.RvLayProfilesBinding
 import anubhav.github.finder.global.MyApp
 import anubhav.github.finder.utils.copyToClipboard
 import anubhav.github.finder.utils.showToast
 import java.lang.RuntimeException
+import kotlin.reflect.KFunction3
 
 class ProfileAdapter constructor(
     private val context: Context,
